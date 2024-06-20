@@ -1,16 +1,14 @@
 const express = require("express");
 const router = express.Router();
 const { cassandraClient } = require("../data_access/db_connection");
-const { v4: uuidv4 } = require("uuid"); // Para UUID versión 4
-const { loadData } = require("../service/load_data"); // Importar la función loadData
+const { v4: uuidv4 } = require("uuid");
+const { loadData } = require("../service/load_data");
 
 router.post("/activities", async (req, res, next) => {
-  console.log("Creating activity");
   try {
     const { user_id, game_id, activity_type, data } = req.body;
 
-    console.log("BODY: ", req.body);
-    const id = uuidv4(); // UUID v4
+    const id = uuidv4();
     const timestamp = new Date().toISOString();
 
     const query = `
